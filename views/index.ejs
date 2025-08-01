@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>WhatsApp Chats</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #e5ddd5;
+      margin: 0;
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 600px;
+      margin: 0 auto;
+      background: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    h1 {
+      text-align: center;
+      color: #075e54;
+    }
+
+    .new-btn {
+      display: block;
+      margin: 15px auto;
+      padding: 10px 20px;
+      background-color: #25D366;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+      text-decoration: none;
+      text-align: center;
+    }
+
+    .new-btn:hover {
+      background-color: #128c7e;
+    }
+
+    .chat {
+      margin: 15px 0;
+      padding: 15px;
+      border-radius: 10px;
+      background-color: #dcf8c6;
+      position: relative;
+    }
+
+    .chat .from {
+      font-weight: bold;
+      color: #075e54;
+    }
+
+    .chat .to {
+      color: #128c7e;
+      font-style: italic;
+    }
+
+    .chat .message {
+      margin-top: 8px;
+      color: #333;
+    }
+
+    .chat .time {
+      font-size: 12px;
+      color: #999;
+      position: absolute;
+      bottom: 5px;
+      right: 10px;
+    }
+
+    .footer {
+      text-align: center;
+      font-size: 13px;
+      color: #aaa;
+      margin-top: 40px;
+    }
+
+    /* Buttons */
+    .edit-btn, .delete-btn {
+      background: transparent;
+      border: none;
+      font-size: 18px;
+      cursor: pointer;
+      transition: 0.2s ease;
+    }
+
+    .edit-btn {
+      color: #2980b9;
+      position: absolute;
+      top: 10px;
+      left: 10px;
+    }
+
+    .edit-btn:hover {
+      color: #3498db;
+    }
+
+    .delete-btn {
+      color: #c0392b;
+      position: absolute;
+      top: 10px;
+      right: 10px;
+    }
+
+    .delete-btn:hover {
+      color: #e74c3c;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>📱 Chat Messages</h1>
+
+    <a href="/new" class="new-btn">+ New Message</a>
+
+    <% chats.forEach(chat => { %>
+      <div class="chat">
+        <!-- Edit Button -->
+        <form action="/post/<%= chat.id%>/edit " method="GET">
+          <button class="edit-btn" title="Edit">✏️</button>
+        </form>
+
+        <!-- Delete Button -->
+        <form action="/delete/<%= chat.id %>" method="POST">
+ 
+          <button class="delete-btn" title="Delete">🗑️</button>
+
+        </form>
+
+        <div class="from"><%= chat.from %> ➡️ <span class="to"><%= chat.to %></span></div>
+        <div class="message"><%= chat.message %></div>
+        <div class="time"><%= new Date(chat.time).toLocaleString() %></div>
+      </div>
+    <% }) %>
+  </div>
+
+  <div class="footer">Made with 💚 by Lenin</div>
+</body>
+</html>
